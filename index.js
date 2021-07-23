@@ -23,6 +23,21 @@ const { MongoClient, ObjectId } = require("mongodb");
     // Informo ao Express que todo corpo
     // de requisição será estruturado em JSON
     app.use(express.json());
+    
+    // CORS
+
+    app.all('/*', (req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+
+        res.header('Access-Control-Allow-Methods', '*');
+
+        res.header(
+            'Access-Control-Allow-Headers',
+            'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization',
+        );
+
+        next();
+    });
 
     app.get("/hello", function (req, res) {
         res.send("Hello World");
